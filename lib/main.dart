@@ -31,7 +31,7 @@ class _PottyTrainingHomePageState extends State<PottyTrainingHomePage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Text('Potties'),
-    Text('Locate Potty'),
+    Text('Locate Potty Feature Coming Soon!'),
     Text('Tips'),
   ];
   void _onItemTapped(int index) {
