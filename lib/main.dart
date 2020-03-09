@@ -48,6 +48,26 @@ class _PottyTrainingHomePageState extends State<PottyTrainingHomePage> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(child: Text('User Account')),
+            ListTile(
+              title: Text('Account'),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('LogOut/In'),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => print('Record Potty'),
         label: FaIcon(FontAwesomeIcons.toilet),
