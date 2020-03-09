@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:potty_training_journey/widgets/potty_training_drawer.dart';
+import './widgets/potty_training_bottom_nav.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,27 +13,27 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Potty Training Journey'),
+      home: PottyTrainingHomePage(title: 'Potty Training Journey'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({this.title});
+class PottyTrainingHomePage extends StatefulWidget {
+  PottyTrainingHomePage({this.title});
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _PottyTrainingHomePageState createState() => _PottyTrainingHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _PottyTrainingHomePageState extends State<PottyTrainingHomePage> {
   int _selectedIndex = 0;
-  // static const List<Widget> _widgetOptions = <Widget>[
-  //   Text('Record Potty'),
-  //   Text('Locate Potty'),
-  //   Text('Tips'),
-  // ];
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text('Potties'),
+    Text('Locate Potty Feature Coming Soon!'),
+    Text('Tips'),
+  ];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -44,29 +46,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      drawer: PottyTrainingDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => print('Record Potty'),
         label: FaIcon(FontAwesomeIcons.toilet),
         tooltip: 'Record',
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.list),
-            title: Text('Potties'),
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.mapMarkerAlt),
-            title: Text('Locate Potty'),
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.lightbulb),
-            title: Text('Tips'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+      bottomNavigationBar: PottyTrainingBottomNav(
+        handelTapped: _onItemTapped,
+        selectedIndex: _selectedIndex,
       ),
     );
   }
