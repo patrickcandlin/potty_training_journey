@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:potty_training_journey/widgets/potty_training_drawer.dart';
 import './widgets/potty_training_bottom_nav.dart';
 
 void main() => runApp(MyApp());
@@ -48,26 +49,7 @@ class _PottyTrainingHomePageState extends State<PottyTrainingHomePage> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(child: Text('User Account')),
-            ListTile(
-              title: Text('Account'),
-              onTap: (){
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('LogOut/In'),
-              onTap: (){
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: PottyTrainingDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => print('Record Potty'),
         label: FaIcon(FontAwesomeIcons.toilet),
