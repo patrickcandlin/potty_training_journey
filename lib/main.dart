@@ -29,7 +29,7 @@ class PottyTrainingHomePage extends StatefulWidget {
 class _PottyTrainingHomePageState extends State<PottyTrainingHomePage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('Record Potty'),
+    Text('Potties'),
     Text('Locate Potty'),
     Text('Tips'),
   ];
