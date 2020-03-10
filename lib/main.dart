@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:potty_training_journey/widgets/potty_training_drawer.dart';
 import './widgets/potty_training_bottom_nav.dart';
 import './models/potty.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -50,7 +51,7 @@ class _PottyTrainingHomePageState extends State<PottyTrainingHomePage> {
     ),
     Potty(
       id: '2',
-      date: DateTime.now(),
+      date: DateTime.now().add(new Duration(days: -1)),
       ownerId: '1',
       excretionType: '2',
       onPotty: true,
@@ -125,36 +126,53 @@ class _PottyTrainingHomePageState extends State<PottyTrainingHomePage> {
                             horizontal: 15,
                           ),
                           child: Column(
-                            children: _potties.map((potty){
+                            children: _potties.map((potty) {
                               return Container(
+                                margin: EdgeInsets.symmetric(vertical: 1,),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Text(
-                                      potty.date.toString(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                                    Container(
+                                      width: 90,
+                                      child: Text(
+                                        DateFormat.jm().format(potty.date),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
-                                    Text(
-                                      '#1',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                                    Container(
+                                      width: 30,
+                                      child: Text(
+                                        '#${potty.excretionType}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
-                                    FaIcon(
-                                      FontAwesomeIcons.check,
-                                      color: Colors.green,
-                                      size: 30,
-                                    ),
-                                    FaIcon(
-                                      FontAwesomeIcons.infoCircle,
-                                      color: Colors.blue,
-                                      size: 20,
-                                    ),
+                                    potty.onPotty
+                                        ? FaIcon(
+                                            FontAwesomeIcons.checkCircle,
+                                            color: Colors.green,
+                                            size: 30,
+                                          )
+                                        : FaIcon(
+                                            FontAwesomeIcons.timesCircle,
+                                            color: Colors.red,
+                                            size: 30,
+                                          ),
+                                    potty.notes == null
+                                        ? Container(
+                                          width: 20,
+                                        )
+                                        : FaIcon(
+                                            FontAwesomeIcons.infoCircle,
+                                            color: Colors.blue,
+                                            size: 20,
+                                          ),
                                   ],
                                 ),
                               );
